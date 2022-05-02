@@ -12,6 +12,7 @@ jobs:
     steps:
       - node/install
       - checkout
+      - aws-cli/setup # setting up aws cli
       # install dependencies in both apps
       - run:
           name: Front-End Install
@@ -21,6 +22,7 @@ jobs:
           name: Back-End Install
           command: |
             npm run backend:install
+      # build code in both apps
       - run:
           name: Front-End Build
           command: |
@@ -29,3 +31,8 @@ jobs:
           name: Back-End Build
           command: |
             npm run backend:build
+      # deploy code in both apps
+      - run:
+          name: Front-End Deploy App
+          command: |
+            npm run frontend:deploy
